@@ -14,12 +14,6 @@ const port = process.env.PORT || 4000;
 const __dirname = path.resolve();
 const app = express();
 
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname__, "frontend", "dist", "index.html"));
-});
-
 // Database
 connectDB();
 
@@ -35,5 +29,11 @@ app.use("/api/v1/post", postRoutes);
 app.use("/api/v1/upload", uploadRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
