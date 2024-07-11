@@ -6,12 +6,19 @@ import userRoutes from "./routes/userRoutes.js";
 import genreRoutes from "./routes/genreRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
-import path from "path";
+import path, { join } from "path";
 
 dotenv.config();
 const port = process.env.PORT || 4000;
 
 const app = express();
+
+const __dirname__ = path.resolve();
+app.use(express.static(path.join(__dirname__, "/frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname__, "frontend", "dist", "indexl.html"));
+});
 
 // Database
 connectDB();
