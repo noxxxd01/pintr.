@@ -13,13 +13,6 @@ const port = process.env.PORT || 4000;
 
 const app = express();
 
-const __dirname__ = path.resolve();
-app.use(express.static(path.join(__dirname__, "/frontend/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname__, "frontend", "dist", "index.html"));
-});
-
 // Database
 connectDB();
 
