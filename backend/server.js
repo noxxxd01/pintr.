@@ -11,10 +11,10 @@ import path, { join } from "path";
 dotenv.config();
 const port = process.env.PORT || 4000;
 
+const __dirname = path.resolve();
 const app = express();
 
-const __dirname__ = path.resolve();
-app.use(express.static(path.join(__dirname__, "/frontend/dist")));
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname__, "frontend", "dist", "index.html"));
@@ -34,7 +34,6 @@ app.use("/api/v1/genre", genreRoutes);
 app.use("/api/v1/post", postRoutes);
 app.use("/api/v1/upload", uploadRoutes);
 
-const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
